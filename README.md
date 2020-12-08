@@ -1,10 +1,10 @@
-# rocketMq-demo
+# rabbitMq-demo
 
-A rocket demo with Egg.js.
+A rabbitmq demo with Egg.js.
 
 ## QuickStart
 
-<!-- add docs here for user -->
+see config.default.js, app.js, app/mq/rabbit.js.
 
 see [egg docs][egg] for more detail.
 

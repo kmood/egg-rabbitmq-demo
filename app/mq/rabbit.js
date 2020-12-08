@@ -8,12 +8,13 @@ async function rabbitInit(app) {
     // 1. 创建链接
     const connection = await connect(options);
     app.logger.info('Rabbitmq: Connected!');
+    // TODO： 创建多个channel
     // 2. 创建channel
     const channel = await connection.createChannel();
     for (const key in exchanges) {
       const { name, type, durable, queues } = exchanges[key];
       await channel.assertExchange(name, type, { durable });
-      if (name === 'REPLY') await channel.prefetch(1, false);
+      await channel.prefetch(1, false); // global设置为false，该数值只对当前 channel有效
       for (const queue of queues) {
         await channel.assertQueue(queue.name);
         await channel.bindQueue(queue.name, name, queue.pattern);

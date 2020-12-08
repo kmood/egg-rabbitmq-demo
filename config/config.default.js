@@ -40,15 +40,15 @@ module.exports = appInfo => {
         queues: [
           {
             name: 'WECHAT_MESSAGE',
-            pattern: '*.wechat',
+            pattern: 'wechat.#',
           },
           {
             name: 'WXWORK_MESSAGE',
-            pattern: '*.wxwork',
+            pattern: 'wxwork.#',
           },
           {
             name: 'LINE_MESSAGE',
-            pattern: '*.line',
+            pattern: 'line.#',
           },
         ],
       },
@@ -59,15 +59,15 @@ module.exports = appInfo => {
         queues: [
           {
             name: 'WECHAT_REPLY',
-            pattern: '*.wechat',
+            pattern: 'wechat.#',
           },
           {
             name: 'WXRORK_REPLY',
-            pattern: '*.wxwork',
+            pattern: 'wxwork.#',
           },
           {
             name: 'LINE_REPLY',
-            pattern: '*.line',
+            pattern: 'line.#',
           },
         ],
       },

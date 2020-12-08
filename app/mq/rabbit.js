@@ -16,10 +16,6 @@ async function rabbitInit(app) {
       for (const queue of queues) {
         await channel.assertQueue(queue.name);
         await channel.bindQueue(queue.name, name, queue.pattern);
-        // consumer
-        await channel.consume(queue.name, message => {
-          console.log(queue.name, ': ', message.content.toString());
-        }, { noAck: true });
       }
     }
     app.rabbit = channel;

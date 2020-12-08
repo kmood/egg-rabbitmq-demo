@@ -13,6 +13,7 @@ async function rabbitInit(app) {
     for (const key in exchanges) {
       const { name, type, durable, queues } = exchanges[key];
       await channel.assertExchange(name, type, { durable });
+      if (name === 'REPLY') await channel.prefetch(1, false);
       for (const queue of queues) {
         await channel.assertQueue(queue.name);
         await channel.bindQueue(queue.name, name, queue.pattern);

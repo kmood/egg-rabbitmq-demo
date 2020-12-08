@@ -38,13 +38,13 @@ class AppBootHook {
     const ctx = await app.createAnonymousContext();
 
     // 消息队列消费者 此处拿到ctx对象可以调用service
-    await app.rabbit.consume('WECHAT_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo), { noAck: true });
-    await app.rabbit.consume('WXWORK_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo), { noAck: true });
-    await app.rabbit.consume('LINE_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo), { noAck: true });
+    await app.rabbit.consume('WECHAT_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
+    await app.rabbit.consume('WXWORK_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
+    await app.rabbit.consume('LINE_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
 
-    await app.rabbit.consume('WECHAT_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo), { noAck: true });
-    await app.rabbit.consume('WXWORK_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo), { noAck: true });
-    await app.rabbit.consume('LINE_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo), { noAck: true });
+    await app.rabbit.consume('WECHAT_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
+    await app.rabbit.consume('WXWORK_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
+    await app.rabbit.consume('LINE_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
   }
 
   async serverDidReady() {

@@ -33,14 +33,8 @@ class AppBootHook {
   }
 
   async didReady() {
-    const { app } = this;
     // 应用已经启动完毕
     // const ctx = await app.createAnonymousContext();
-    // consumer message
-    app.rabbit.consume('customer', console.log, { noAck: true });
-    app.rabbit.consume('service', console.log, { noAck: true });
-    app.rabbit.consume('person', console.log, { noAck: true });
-    app.rabbit.consume('chatroom', console.log, { noAck: true });
 
   }
 

@@ -35,31 +35,39 @@ module.exports = appInfo => {
     exchanges: {
       message: {
         name: 'MESSAGE',
-        type: 'direct',
+        type: 'topic',
         durable: false,
         queues: [
           {
-            name: 'customer',
-            pattern: 'CUSTOMER.*',
+            name: 'WECHAT_MESSAGE',
+            pattern: '*.wechat',
           },
           {
-            name: 'service',
-            pattern: 'SERVICE.*',
+            name: 'WXWORK_MESSAGE',
+            pattern: '*.wxwork',
+          },
+          {
+            name: 'LINE_MESSAGE',
+            pattern: '*.line',
           },
         ],
       },
       reply: {
         name: 'REPLY',
-        type: 'direct',
+        type: 'topic',
         durable: false,
         queues: [
           {
-            name: 'person',
-            pattern: 'PERSON.*',
+            name: 'WECHAT_REPLY',
+            pattern: '*.wechat',
           },
           {
-            name: 'chatroom',
-            pattern: 'CHATROOM.*',
+            name: 'WXRORK_REPLY',
+            pattern: '*.wxwork',
+          },
+          {
+            name: 'LINE_REPLY',
+            pattern: '*.line',
           },
         ],
       },

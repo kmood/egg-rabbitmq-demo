@@ -27,9 +27,6 @@ class AppBootHook {
     // 消息队列
     await rabbitmq(app);
     if (!app.rabbit) process.exit();
-    app.rabbit.on('close', async () => {
-      await rabbitmq(app);
-    });
   }
 
   async didReady() {
@@ -38,13 +35,10 @@ class AppBootHook {
     const ctx = await app.createAnonymousContext();
 
     // 消息队列消费者 此处拿到ctx对象可以调用service
-    await app.rabbit.consume('WECHAT_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
-    await app.rabbit.consume('WXWORK_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
-    await app.rabbit.consume('LINE_MESSAGE', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
-
-    await app.rabbit.consume('WECHAT_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
-    await app.rabbit.consume('WXWORK_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
-    await app.rabbit.consume('LINE_REPLY', ctx.service.consumer.demo.consume.bind(ctx.service.consumer.demo));
+    const { MESSAGE } = app.rabbit;
+    await MESSAGE.consume('WECHAT_MESSAGE', ctx.service.consumer.message.consume.bind(ctx.service.consumer.message), { noAck: true });
+    await MESSAGE.consume('WXWORK_MESSAGE', ctx.service.consumer.message.consume.bind(ctx.service.consumer.message), { noAck: true });
+    await MESSAGE.consume('LINE_MESSAGE', ctx.service.consumer.message.consume.bind(ctx.service.consumer.message), { noAck: true });
   }
 
   async serverDidReady() {

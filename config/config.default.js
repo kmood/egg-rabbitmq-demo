@@ -37,39 +37,30 @@ module.exports = appInfo => {
         name: 'MESSAGE',
         type: 'topic',
         durable: false,
-        queues: [
-          {
-            name: 'WECHAT_MESSAGE',
-            pattern: 'wechat.#',
-          },
-          {
-            name: 'WXWORK_MESSAGE',
-            pattern: 'wxwork.#',
-          },
-          {
-            name: 'LINE_MESSAGE',
-            pattern: 'line.#',
-          },
-        ],
+        prefetch: 10,
       },
       reply: {
         name: 'REPLY',
         type: 'topic',
         durable: false,
-        queues: [
-          {
-            name: 'WECHAT_REPLY',
-            pattern: 'wechat.#',
-          },
-          {
-            name: 'WXRORK_REPLY',
-            pattern: 'wxwork.#',
-          },
-          {
-            name: 'LINE_REPLY',
-            pattern: 'line.#',
-          },
-        ],
+        prefetch: 1,
+      },
+    },
+    queues: {
+      wechatMessage: {
+        name: 'WECHAT_MESSAGE',
+        pattern: 'wechat.#',
+        exchange: 'MESSAGE',
+      },
+      wxworkMessage: {
+        name: 'WXWORK_MESSAGE',
+        pattern: 'wxwork.#',
+        exchange: 'MESSAGE',
+      },
+      lineMessage: {
+        name: 'LINE_MESSAGE',
+        pattern: 'line.#',
+        exchange: 'MESSAGE',
       },
     },
   };
